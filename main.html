@@ -130,17 +130,22 @@
 
     logFormId.addEventListener("submit", (event) => {
       event.preventDefault();
-      formdatas(logFormId);
+      const logData = formdatas(logFormId);
+      console.log(logData);
     });
 
     regFormId.addEventListener("submit", (event) => {
       event.preventDefault();
       const regData = formdatas(regFormId);
 
-      if (regData["password"] !== regData["confirm_password"]) {
-        alert("Password doesn't match!");
+      if (regData["password"] == "") {
+        alert("Password Empty");
       } else {
-        console.log("success");
+        if (regData["password"] !== regData["confirm_password"]) {
+          alert("Password doesn't match!");
+        } else {
+          console.log("success");
+        }
       }
     });
   </script>
