@@ -11,22 +11,25 @@
         font-family: Arial, Helvetica, sans-serif;
       }
 
+      .default-margin {
+        margin-top: 20px;
+      }
+
       nav {
         text-align: center;
       }
 
-      nav li {
+      nav ul li {
         display: inline;
       }
 
       nav a {
-        font-size: smaller;
         text-decoration: none;
         padding: 0 25px;
       }
 
-      nav li a:hover {
-        color: aquamarine;
+      nav a:hover {
+        color: aqua;
       }
 
       form {
@@ -34,103 +37,109 @@
       }
 
       form input {
+        height: 15px;
         display: flex;
         margin: auto;
-        margin-bottom: 10px;
-        border: none;
-        background-color: aliceblue;
-        color: #1f1f1f;
-        height: 20px;
         text-align: center;
+        padding: 10px 20px;
+        margin-bottom: 10px;
       }
 
       button {
-        margin-top: 10px;
-        border: none;
-        border: 1px;
-      }
-
-      button:hover {
         cursor: pointer;
+        margin-top: 10px;
+        font-size: medium;
+        padding: 8px;
       }
     </style>
   </head>
+
   <body>
-    <div style="margin-top: 10px">
+    <div class="default-margin">
       <nav>
-        <li><a id="logLink" href="#" onclick="login()">LOGIN</a></li>
-        <li><a id="reglink" href="#" onclick="register()">REGISTER</a></li>
+        <ul>
+          <li>
+            <a id="loginLink" href="#">LOGIN</a>
+          </li>
+          <li>
+            <a id="registerLink" href="#">REGISTER</a>
+          </li>
+        </ul>
       </nav>
     </div>
 
-    <div id="forms" style="margin-top: 50px">
-      <form id="login" method="post" hidden>
-        <input
-          name="username"
-          id="username"
-          type="text"
-          placeholder="username"
-        />
-        <input
-          name="password"
-          id="password"
-          type="password"
-          placeholder="password"
-        />
-        <button type="submit" onclick="do_login(event)">SUBMIT</button>
+    <div class="default-margin">
+      <form id="loginForm">
+        <input name="username" type="text" placeholder="username" />
+        <input name="password" type="password" placeholder="password" />
+        <button type="submit">Submit</button>
       </form>
-      <form id="register" method="post">
+      <form id="registerForm" hidden>
         <input name="name" type="text" placeholder="name" />
         <input name="username" type="text" placeholder="username" />
         <input name="password" type="password" placeholder="password" />
         <input
           name="confirm_password"
-          type="password"
+          type="confirm_password"
           placeholder="confirm password"
         />
-        <button type="submit" onclick="do_register(event)">SUBMIT</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   </body>
 
   <script>
-    const regLink = document.getElementById("reglink");
-    const logLink = document.getElementById("logLink");
+    const logLinkId = document.getElementById("loginLink");
+    const regLinkId = document.getElementById("registerLink");
 
-    const regId = document.getElementById("register");
-    const logId = document.getElementById("login");
+    const logFormId = document.getElementById("loginForm");
+    const regFormId = document.getElementById("registerForm");
 
-    function register() {
-      logLink.style.color = "aliceblue";
-      regLink.style.color = "aquamarine";
-      logId.hidden = true;
-      regId.hidden = false;
-    }
-
-    function login() {
-      logLink.style.color = "aquamarine";
-      regLink.style.color = "aliceblue";
-      regId.hidden = true;
-      logId.hidden = false;
-    }
-
-    function formdata(elementId) {
+    function toggleForms(event, showLoginForm) {
       event.preventDefault();
 
+      if (showLoginForm) {
+        logFormId.hidden = false;
+        regFormId.hidden = true;
+        logLinkId.style.color = "aqua";
+        regLinkId.style.color = "aliceblue";
+      } else {
+        logFormId.hidden = true;
+        regFormId.hidden = false;
+        logLinkId.style.color = "aliceblue";
+        regLinkId.style.color = "aqua";
+      }
+    }
+
+    logLinkId.addEventListener("click", (event) => {
+      toggleForms(event, true);
+    });
+
+    regLinkId.addEventListener("click", (event) => {
+      toggleForms(event, false);
+    });
+
+    function formdatas(elementId) {
       const formData = new FormData(elementId);
       const dataArray = [];
 
-      formData.forEach((value, key) => dataArray.push({ [key]: value }));
+      formData.forEach((value, key) => {
+        dataArray.push({ [key]: value });
+      });
 
       console.log(dataArray);
+
+      return dataArray;
     }
 
-    function do_login(event) {
-      formdata(logId);
-    }
+    logFormId.addEventListener("submit", (event) => {
+      event.preventDefault();
+      formdatas(logFormId);
+    });
 
-    function do_register(event) {
-      formdata(regId);
-    }
+    regFormId.addEventListener("submit", (event) => {
+      event.preventDefault();
+      formdatas(regFormId);
+    });
   </script>
 </html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Native Exercise</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        background-color: #1f1f1f;
+        color: aliceblue;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      nav {
+        text-align: center;
+      }
+
+      nav li {
+        display: inline;
+      }
+
+      nav a {
+        font-size: smaller;
+        text-decoration: none;
+        padding: 0 25px;
+      }
+
+      nav li a:hover {
+        color: aquamarine;
+      }
+
+      form {
+        text-align: center;
+      }
+
+      form input {
+        display: flex;
+        margin: auto;
+        margin-bottom: 10px;
+        border: none;
+        background-color: aliceblue;
+        color: #1f1f1f;
+        height: 20px;
+        text-align: center;
+      }
+
+      button {
+        margin-top: 10px;
+        border: none;
+        border: 1px;
+      }
+
+      button:hover {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="margin-top: 10px">
+      <nav>
+        <li><a id="logLink" href="#" onclick="login()">LOGIN</a></li>
+        <li><a id="reglink" href="#" onclick="register()">REGISTER</a></li>
+      </nav>
+    </div>
+
+    <div id="forms" style="margin-top: 50px">
+      <form id="login" method="post" hidden>
+        <input
+          name="username"
+          id="username"
+          type="text"
+          placeholder="username"
+        />
+        <input
+          name="password"
+          id="password"
+          type="password"
+          placeholder="password"
+        />
+        <button type="submit" onclick="do_login(event)">SUBMIT</button>
+      </form>
+      <form id="register" method="post">
+        <input name="name" type="text" placeholder="name" />
+        <input name="username" type="text" placeholder="username" />
+        <input name="password" type="password" placeholder="password" />
+        <input
+          name="confirm_password"
+          type="password"
+          placeholder="confirm password"
+        />
+        <button type="submit" onclick="do_register(event)">SUBMIT</button>
+      </form>
+    </div>
+  </body>
+
+  <script>
+    const regLink = document.getElementById("reglink");
+    const logLink = document.getElementById("logLink");
+
+    const regId = document.getElementById("register");
+    const logId = document.getElementById("login");
+
+    function register() {
+      logLink.style.color = "aliceblue";
+      regLink.style.color = "aquamarine";
+      logId.hidden = true;
+      regId.hidden = false;
+    }
+
+    function login() {
+      logLink.style.color = "aquamarine";
+      regLink.style.color = "aliceblue";
+      regId.hidden = true;
+      logId.hidden = false;
+    }
+
+    function formdata(elementId) {
+      event.preventDefault();
+
+      const formData = new FormData(elementId);
+      const dataArray = [];
+
+      formData.forEach((value, key) => dataArray.push({ [key]: value }));
+
+      console.log(dataArray);
+    }
+
+    function do_login(event) {
+      formdata(logId);
+    }
+
+    function do_register(event) {
+      formdata(regId);
+    }
+  </script>
+</html>
