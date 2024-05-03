@@ -25,6 +25,10 @@
         padding: 0 25px;
       }
 
+      nav li a:hover {
+        color: aquamarine;
+      }
+
       form {
         text-align: center;
       }
@@ -46,56 +50,87 @@
         border: 1px;
       }
 
-      button a {
-        text-decoration: none;
+      button:hover {
+        cursor: pointer;
       }
     </style>
   </head>
   <body>
     <div style="margin-top: 10px">
       <nav>
-        <li><a href="#" onclick="login()">LOGIN</a></li>
-        <li><a href="#" onclick="register()">REGISTER</a></li>
+        <li><a id="logLink" href="#" onclick="login()">LOGIN</a></li>
+        <li><a id="reglink" href="#" onclick="register()">REGISTER</a></li>
       </nav>
     </div>
 
     <div id="forms" style="margin-top: 50px">
-      <form id="login" action="" method="post">
-        <input id="username" type="text" placeholder="username" />
-        <input id="password" type="password" placeholder="password" />
-        <button type="submit" onclick="do_login(event)">Login</button>
+      <form id="login" method="post" hidden>
+        <input
+          name="username"
+          id="username"
+          type="text"
+          placeholder="username"
+        />
+        <input
+          name="password"
+          id="password"
+          type="password"
+          placeholder="password"
+        />
+        <button type="submit" onclick="do_login(event)">SUBMIT</button>
       </form>
-      <form id="register" action="" method="post" hidden>
-        <input type="text" name="" placeholder="name" />
-        <input type="text" name="" placeholder="username" />
-        <input type="password" name="" placeholder="password" />
-        <input type="password" name="" placeholder="confirm password" />
-        <button type="submit">Register</button>
+      <form id="register" method="post">
+        <input name="name" type="text" placeholder="name" />
+        <input name="username" type="text" placeholder="username" />
+        <input name="password" type="password" placeholder="password" />
+        <input
+          name="confirm_password"
+          type="password"
+          placeholder="confirm password"
+        />
+        <button type="submit" onclick="do_register(event)">SUBMIT</button>
       </form>
     </div>
   </body>
 
   <script>
+    const regLink = document.getElementById("reglink");
+    const logLink = document.getElementById("logLink");
+
     const regId = document.getElementById("register");
     const logId = document.getElementById("login");
 
     function register() {
+      logLink.style.color = "aliceblue";
+      regLink.style.color = "aquamarine";
       logId.hidden = true;
       regId.hidden = false;
     }
 
     function login() {
+      logLink.style.color = "aquamarine";
+      regLink.style.color = "aliceblue";
       regId.hidden = true;
       logId.hidden = false;
     }
 
-    function do_login(event){
+    function formdata(elementId) {
       event.preventDefault();
 
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
+      const formData = new FormData(elementId);
+      const dataArray = [];
 
-      alert(`ajax request ${username} | ${password}`);
+      formData.forEach((value, key) => dataArray.push({ [key]: value }));
+
+      console.log(dataArray);
+    }
+
+    function do_login(event) {
+      formdata(logId);
+    }
+
+    function do_register(event) {
+      formdata(regId);
     }
   </script>
 </html>
