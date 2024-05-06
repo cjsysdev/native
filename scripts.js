@@ -4,7 +4,7 @@ const regLinkId = document.getElementById("registerLink");
 const logFormId = document.getElementById("loginForm");
 const regFormId = document.getElementById("registerForm");
 
-function toggleForms(event, showLoginForm) {
+function toggleForms(showLoginForm) {
   if (showLoginForm) {
     logFormId.hidden = false;
     regFormId.hidden = true;
@@ -18,12 +18,14 @@ function toggleForms(event, showLoginForm) {
   }
 }
 
-logLinkId.addEventListener("click", (event) => {
-  toggleForms(event, true);
+logLinkId.addEventListener("click", (e) => {
+  e.preventDefault();
+  toggleForms(true);
 });
 
-regLinkId.addEventListener("click", (event) => {
-  toggleForms(event, false);
+regLinkId.addEventListener("click", (e) => {
+  e.preventDefault();
+  toggleForms(false);
 });
 
 function formdatas(elementId) {
@@ -40,7 +42,12 @@ function formdatas(elementId) {
 logFormId.addEventListener("submit", (event) => {
   event.preventDefault();
   const logData = formdatas(logFormId);
-  console.log(logData);
+
+  if (logData["password"] == "") {
+    alert("Password Empty");
+  } else {
+    sendDataToServer(logData, "login.php");
+  }
 });
 
 regFormId.addEventListener("submit", (event) => {
@@ -53,14 +60,14 @@ regFormId.addEventListener("submit", (event) => {
     if (regData["password"] !== regData["confirm_password"]) {
       alert("Password doesn't match!");
     } else {
-      sendDataToServer(regData);
+      sendDataToServer(regData, "register.php");
     }
   }
 });
 
-function sendDataToServer(data) {
+function sendDataToServer(data, url) {
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", "user.php", true);
+  xhr.open("POST", url, true);
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
   xhr.onreadystatechange = function () {
