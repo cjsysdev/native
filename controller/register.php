@@ -3,7 +3,11 @@
 include "db_conn.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $sql = "INSERT INTO users (name, username, password) VALUES ({$_POST['name']}, {$_POST['username']}, {$_POST['password']})";
+    $name = $_POST['name'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $sql = "INSERT INTO users (name, username, password) VALUES ('$name', '$username', '$password')";
 
     if ($conn->query($sql)) {
         echo "Success!";

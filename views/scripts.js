@@ -46,7 +46,7 @@ logFormId.addEventListener("submit", (event) => {
   if (logData["password"] == "") {
     alert("Password Empty");
   } else {
-    sendDataToServer(logData, "login.php");
+    sendDataToServer(logData, "controller/login.php");
   }
 });
 
@@ -60,7 +60,7 @@ regFormId.addEventListener("submit", (event) => {
     if (regData["password"] !== regData["confirm_password"]) {
       alert("Password doesn't match!");
     } else {
-      sendDataToServer(regData, "register.php");
+      sendDataToServer(regData, "controller/register.php");
     }
   }
 });
@@ -72,7 +72,8 @@ function sendDataToServer(data, url) {
 
   xhr.onreadystatechange = function () {
     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-      console.log(xhr.responseText);
+      const res = xhr.responseText;
+      console.log(res);
     }
   };
 

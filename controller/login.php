@@ -9,9 +9,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
 
-        if ($user['password'] == $_POST['password']) {
-            echo "Success";
+        if ($user['password'] !== $_POST['password']) {
+            echo "Wrong password";
         }
+
+        echo "Success";
     } else {
         echo "user not found";
     }
