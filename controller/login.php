@@ -18,6 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['online'] = true;
 
         $htmlContent = '<div class="default-margin">Welcome to Dashboard</div>';
+        $htmlContent .= '<button id="logout" type="submit">Logout</button>';
+        $htmlContent .= $_SESSION['username'];
 
         header('Content-Type: text/html');
         echo $htmlContent;
