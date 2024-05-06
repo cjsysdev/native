@@ -2,56 +2,7 @@
 <html>
   <head>
     <title>Native Exercise</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        background-color: #1f1f1f;
-        color: aliceblue;
-        font-family: Arial, Helvetica, sans-serif;
-      }
-
-      .default-margin {
-        margin-top: 20px;
-      }
-
-      nav {
-        text-align: center;
-      }
-
-      nav ul li {
-        display: inline;
-      }
-
-      nav a {
-        text-decoration: none;
-        padding: 0 25px;
-      }
-
-      nav a:hover {
-        color: aqua;
-      }
-
-      form {
-        text-align: center;
-      }
-
-      form input {
-        height: 15px;
-        display: flex;
-        margin: auto;
-        text-align: center;
-        padding: 10px 20px;
-        margin-bottom: 10px;
-      }
-
-      button {
-        cursor: pointer;
-        margin-top: 10px;
-        font-size: medium;
-        padding: 8px;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
@@ -88,65 +39,5 @@
     </div>
   </body>
 
-  <script>
-    const logLinkId = document.getElementById("loginLink");
-    const regLinkId = document.getElementById("registerLink");
-
-    const logFormId = document.getElementById("loginForm");
-    const regFormId = document.getElementById("registerForm");
-
-    function toggleForms(event, showLoginForm) {
-      if (showLoginForm) {
-        logFormId.hidden = false;
-        regFormId.hidden = true;
-        logLinkId.style.color = "aqua";
-        regLinkId.style.color = "aliceblue";
-      } else {
-        logFormId.hidden = true;
-        regFormId.hidden = false;
-        logLinkId.style.color = "aliceblue";
-        regLinkId.style.color = "aqua";
-      }
-    }
-
-    logLinkId.addEventListener("click", (event) => {
-      toggleForms(event, true);
-    });
-
-    regLinkId.addEventListener("click", (event) => {
-      toggleForms(event, false);
-    });
-
-    function formdatas(elementId) {
-      const formData = new FormData(elementId);
-      const dataObj = {};
-
-      formData.forEach((value, key) => {
-        dataObj[key] = value;
-      });
-
-      return dataObj;
-    }
-
-    logFormId.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const logData = formdatas(logFormId);
-      console.log(logData);
-    });
-
-    regFormId.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const regData = formdatas(regFormId);
-
-      if (regData["password"] == "") {
-        alert("Password Empty");
-      } else {
-        if (regData["password"] !== regData["confirm_password"]) {
-          alert("Password doesn't match!");
-        } else {
-          console.log("success");
-        }
-      }
-    });
-  </script>
+  <script src="scripts.js"></script>
 </html>

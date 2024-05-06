@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+    background-color: #1f1f1f;
+    color: aliceblue;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.default-margin {
+    margin-top: 20px;
+}
+
+nav {
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav a {
+    text-decoration: none;
+    padding: 0 25px;
+}
+
+nav a:hover {
+    color: aqua;
+}
+
+form {
+    text-align: center;
+}
+
+form input {
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    height: 15px;
+    display: flex;
+    margin: auto;
+    text-align: center;
+    padding: 10px 20px;
+    margin-bottom: 12px;
+}
+
+button {
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: medium;
+    padding: 8px;
+}
