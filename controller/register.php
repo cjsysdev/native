@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($conn->query($sql)) {
         echo "Success!";
     } else {
-        echo "Error: " . $sql . $conn->error;
+        echo $conn->errno;
     }
 } else {
     echo http_response_code(405);

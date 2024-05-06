@@ -11,9 +11,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($user['password'] !== $_POST['password']) {
             echo "Wrong password";
+            exit();
         }
 
-        echo "Success";
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['online'] = true;
+
+        $htmlContent = '<div class="default-margin">Welcome to Dashboard</div>';
+
+        header('Content-Type: text/html');
+        echo $htmlContent;
+        exit();
     } else {
         echo "user not found";
     }

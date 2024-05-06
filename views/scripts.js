@@ -73,7 +73,23 @@ function sendDataToServer(data, url) {
   xhr.onreadystatechange = function () {
     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
       const res = xhr.responseText;
-      console.log(res);
+      if (data["confirm_password"] == undefined) {
+        if (res == "user not found" || res == "Wrong password") {
+          const main = document.getElementById("main");
+          const inputs = main.getElementsByTagName("input");
+          for (let i = 0; i < inputs.length; i++) {
+            inputs[i].value = "";
+          }
+          alert("Invalid Credentials");
+        } else {
+          const main = document.getElementById("main");
+          main.innerHTML = res;
+        }
+      } else {
+        if (res == '1062') {
+          alert("Username Exist");
+        }
+      }
     }
   };
 

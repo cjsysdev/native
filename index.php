@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="views/style.css" />
   </head>
 
-  <body>
+  <body id="main">
     <div class="default-margin">
       <nav>
         <ul>
